@@ -1,0 +1,32 @@
+# ./docker-compose.yml
+
+version: '3'
+
+services:
+  php:
+    container_name: php
+    build: .
+    ports:
+      - "8100:80"
+    volumes:
+      - ./:/var/www/html/
+  database:
+    container_name: database
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: php_master
+      MYSQL_USER: php_master
+      MYSQL_PASSWORD: secret
+    ports:
+      - '4306:3306'
+    volumes:
+      - ./mysql:/var/lib/mysql
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+    depends_on:
+      - database
