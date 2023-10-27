@@ -4,6 +4,19 @@
     define('APP_URL', "http://localhost:8100/");
 ?>
 
+<?php include_once '/var/www/html/config/config.php'; ?>
+
+<?php
+
+if(isset($_SESSION['user_id'])) {
+    $number = $conn->query("SELECT COUNT(*) as products FROM cart WHERE user_id = '" . $_SESSION['user_id'] . "'");
+    $number->execute();
+
+    $getNumber = $number->fetch(PDO::FETCH_ASSOC);
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,6 +27,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/5c5946fe44.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Bookstore</title>
 </head>
 <body>
@@ -37,7 +51,7 @@
                     <a class="nav-link  text-white" href="http://localhost/bookstore/contact.php">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active  text-white" aria-current="page" href="http://localhost/bookstore/shopping/cart.php"><i class="fas fa-shopping-cart"></i>(2)</a>
+                    <a class="nav-link active  text-white" aria-current="page" href="http://localhost/bookstore/shopping/cart.php"><i class="fas fa-shopping-cart"></i>(<?php echo isset($getNumber['products']) ? $getNumber['products'] : '0'; ?>)</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active  text-white" aria-current="page" href="http://localhost/bookstore/categories/index.php">Categories</a>
