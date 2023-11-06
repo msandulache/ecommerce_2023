@@ -1,11 +1,19 @@
 <?php include_once '../config/config.php'; ?>
 <?php include_once '../includes/header.php'; ?>
 
+
 <?php
     $products = $conn->query("SELECT * FROM cart WHERE user_id = '" . $_SESSION['user_id'] . "'");
     $products->execute();
 
     $allProducts = $products->fetchAll(PDO::FETCH_OBJ);
+
+    if(isset($_POST['submit'])) {
+        $price = $_POST['price'];
+        $_SESSION['price'] = $price;
+
+        echo '<script>window.location="' . APP_URL . 'shopping/checkout.php";</script>';
+    }
 ?>
 
 <div class="container">
@@ -64,17 +72,19 @@
               </div>
               <div class="col-lg-4 bg-grey">
                 <div class="p-5">
-                  <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
-                  <hr class="my-4">
+                    <form method="POST" action="cart.php">
+                        <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                        <hr class="my-4">
 
-                  <div class="d-flex justify-content-between mb-5">
-                    <h5 class="text-uppercase">Total price</h5>
-                      <h5><span class="full_price">Wait please..</span></h5>
-                  </div>
+                        <div class="d-flex justify-content-between mb-5">
+                            <h5 class="text-uppercase">Total price</h5>
+                            <h5><span class="full_price">Wait please..</span></h5>
+                            <input class="inp_price" name="price" value="" type="hidden" />
+                        </div>
 
-                  <button type="button" class="btn btn-dark btn-block btn-lg"
-                    data-mdb-ripple-color="dark">Checkout</button>
-
+                        <button type="submit" name="submit" class="checkout btn btn-dark btn-block btn-lg"
+                                data-mdb-ripple-color="dark">Checkout</button>
+                    </form>
                 </div>
               </div>
             </div>
@@ -164,11 +174,19 @@
         function fetch() {
             setInterval(function () {
                 var sum = 0.0;
-                $('.total_price').each(function()
-                {
+
+                $('.total_price').each(function() {
                     sum += parseFloat($(this).text());
                 });
+
                 $(".full_price").html(sum+"$");
+                $(".inp_price").val(sum);
+
+                if($(".inp_price").val() > 0) {
+                    $('.checkout').show();
+                } else {
+                    $('.checkout').hide();
+                }
             }, 1000);
         }
 

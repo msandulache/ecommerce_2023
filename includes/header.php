@@ -7,14 +7,12 @@
 <?php include_once '/var/www/html/config/config.php'; ?>
 
 <?php
-
 if(isset($_SESSION['user_id'])) {
     $number = $conn->query("SELECT COUNT(*) as products FROM cart WHERE user_id = '" . $_SESSION['user_id'] . "'");
     $number->execute();
 
     $getNumber = $number->fetch(PDO::FETCH_ASSOC);
 }
-
 ?>
 
 <!doctype html>

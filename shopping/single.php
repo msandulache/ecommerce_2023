@@ -2,6 +2,10 @@
 <?php include_once '../includes/header.php'; ?>
 
 <?php
+    if(!isset($_GET['id'])) {
+        echo '404 not exist';
+        exit;
+    }
 
     if(isset($_POST['submit'])) {
         $pro_id = $_POST['pro_id'];
@@ -12,9 +16,8 @@
         $pro_file = $_POST['pro_file'];
         $user_id = $_POST['user_id'];
 
-        $insert = $conn->prepare("INSERT INTO cart (pro_id, pro_name, pro_image, pro_price, pro_amount, pro_file, user_id, created_at) VALUES (:pro_id, :pro_name, :pro_image, :pro_price, :pro_amount, :pro_file, :user_id, :created_at)");
+        $insert = $conn->prepare("INSERT INTO cart (pro_name, pro_image, pro_price, pro_amount, pro_file, user_id, created_at) VALUES (:pro_name, :pro_image, :pro_price, :pro_amount, :pro_file, :user_id, :created_at)");
         $insert->execute([
-                ':pro_id' => $pro_id,
                 ':pro_name' => $pro_name,
                 ':pro_image' => $pro_image,
                 ':pro_price' => $pro_price,
