@@ -7,4 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Stripe\\' => array($vendorDir . '/stripe/stripe-php/lib'),
+    'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
+    'Faker\\' => array($vendorDir . '/fakerphp/faker/src/Faker'),
 );
