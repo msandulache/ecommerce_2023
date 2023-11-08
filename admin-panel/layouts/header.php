@@ -1,6 +1,7 @@
 <?php
 session_start();
 define("ADMIN_URL", 'http://localhost:8100/admin-panel/');
+define("URL", 'http://localhost:8100/');
 ?>
 
 <!DOCTYPE html>
@@ -12,8 +13,10 @@ define("ADMIN_URL", 'http://localhost:8100/admin-panel/');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo ADMIN_URL;?>/styles/style.css" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 </head>
 <body>
 <div id="wrapper">

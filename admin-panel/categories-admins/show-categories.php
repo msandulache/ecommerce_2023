@@ -15,9 +15,9 @@ $categories = $select->fetchAll(PDO::FETCH_OBJ);
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title mb-4 d-inline">Categories</h5>
-                    <a href="create-category.php" class="btn btn-primary mb-4 text-center float-right">Create
+                    <a href="<?php echo ADMIN_URL . 'categories-admins/create-category.php'; ?>" class="btn btn-primary mb-4 text-center float-right">Create
                         Categories</a>
-                    <table class="table">
+                    <table class="table" id="tblUser">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -31,8 +31,8 @@ $categories = $select->fetchAll(PDO::FETCH_OBJ);
                             <tr>
                                 <th scope="row"><?php echo $category->id; ?></th>
                                 <td><?php echo $category->name; ?></td>
-                                <td><a href="#" class="btn btn-warning text-white text-center ">Update </a></td>
-                                <td><a href="#" class="btn btn-danger  text-center ">Delete </a></td>
+                                <td><a href="<?php echo ADMIN_URL . 'categories-admins/update-category.php?id=' . $category->id; ?>" class="btn btn-warning text-white text-center ">Update </a></td>
+                                <td><a href="<?php echo ADMIN_URL . 'categories-admins/delete-category.php?id=' . $category->id; ?>" class="btn btn-danger  text-center ">Delete </a></td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>
@@ -44,4 +44,9 @@ $categories = $select->fetchAll(PDO::FETCH_OBJ);
 
 
 </div>
+    <script>
+        jQuery(document).ready(function($) {
+            jQuery('#tblUser').DataTable();
+        } );
+    </script>
 <?php include_once '../layouts/footer.php'; ?>
