@@ -33,18 +33,18 @@ define("URL", 'http://localhost:8100/');
                 <?php if (isset($_SESSION['adminname'])): ?>
                     <ul class="navbar-nav side-nav">
                         <li class="nav-item">
-                            <a class="nav-link text-white" style="margin-left: 20px;" href="index.html">Home
+                            <a class="nav-link text-white" style="margin-left: 20px;" href="<?php echo ADMIN_URL; ?>index.php">Home
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="admins/admins.php" style="margin-left: 20px;">Admins</a>
+                            <a class="nav-link" href="<?php echo ADMIN_URL; ?>admins/admins.php" style="margin-left: 20px;">Admins</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="categories-admins/show-categories.php" style="margin-left: 20px;">Categories</a>
+                            <a class="nav-link" href="<?php echo ADMIN_URL; ?>categories-admins/show-categories.php" style="margin-left: 20px;">Categories</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="products-admins/show-products.php" style="margin-left: 20px;">Products</a>
+                            <a class="nav-link" href="<?php echo ADMIN_URL; ?>products-admins/show-products.php" style="margin-left: 20px;">Products</a>
                         </li>
                     </ul>
                 <?php endif; ?>

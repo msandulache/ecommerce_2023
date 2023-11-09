@@ -2,15 +2,12 @@
 <?php include_once '../includes/header.php'; ?>
 
 <?php
-if ( $_SERVER['REQUEST_METHOD']=='GET' && realpath(__FILE__) == realpath( $_SERVER['SCRIPT_FILENAME'] ) ) {
-    //header( 'HTTP/1.0 403 Forbidden', TRUE, 403 );
-    echo 'HTTP/1.0 403 Forbidden';
-    exit;
-}
-?>
 
-<?php
-    if(isset($_SESSION['username'])) {
+    if(!isset($_SERVER['HTTP_REFERER'])) {
+        echo '<script>window.location="' . APP_URL . 'cart.php";</script>';
+    }
+
+    if(!isset($_SESSION['username'])) {
         echo '<script>window.location="' . APP_URL . 'index.php";</script>';
     }
 ?>

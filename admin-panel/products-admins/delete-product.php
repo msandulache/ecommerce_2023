@@ -10,18 +10,23 @@ if(!isset($_SESSION['admin_id'])) {
 if(isset($_GET['id'])) {
 
     try {
-        $select = $conn->prepare("SELECT * FROM categories WHERE id = '" . $_GET['id'] . "'");
+        $select = $conn->prepare("SELECT * FROM products WHERE id = '" . $_GET['id'] . "'");
         $select->execute();
 
         $images = $select->fetch(PDO::FETCH_OBJ);
-        $imageFile = dirname(dirname(__DIR__)) . '/categories/images/' . $images->image;
+        $imageFile = dirname(dirname(__DIR__)) . '/images/' . $images->image;
         if(file_exists($imageFile)) {
             unlink($imageFile);
         }
 
-        $delete = $conn->prepare("DELETE FROM categories WHERE id = '" . $_GET['id'] . "'");
+        $file = dirname(dirname(__DIR__)) . '/books/' . $images->file;
+        if(file_exists($file)) {
+            unlink($file);
+        }
+
+        $delete = $conn->prepare("DELETE FROM products WHERE id = '" . $_GET['id'] . "'");
         $delete->execute();
-        echo '<script>window.location="http://localhost:8100/admin-panel/categories-admins/show-categories.php";</script>';
+        echo '<script>window.location="http://localhost:8100/admin-panel/products-admins/show-products.php";</script>';
 
     } catch(PDOException $e) {
         $e->getMessage();

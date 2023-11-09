@@ -55,5 +55,8 @@ $charge = \Stripe\Charge::create(
     )
 );
 
+$delCart = $conn->query("DELETE FROM cart WHERE user_id = '" . $_SESSION['user_id'] . "'");
+$delCart->execute();
+
 echo 'atat';
 exit;

@@ -1,6 +1,11 @@
 <?php
 
 session_start();
+
+if(!isset($_SESSION['admin_id'])) {
+    echo '<script>window.location="' . ADMIN_URL . 'admins/login-admins.php"</script>';
+}
+
 session_unset();
 session_destroy();
 

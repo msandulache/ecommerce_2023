@@ -3,6 +3,10 @@
 include_once '../../config/config.php';
 include_once '../layouts/header.php';
 
+
+if(!isset($_SESSION['admin_id'])) {
+    echo '<script>window.location="' . ADMIN_URL . 'admins/login-admins.php"</script>';
+}
 ?>
 <?php
 $select = $conn->query("SELECT * FROM admins");
