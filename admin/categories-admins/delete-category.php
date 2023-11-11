@@ -21,7 +21,7 @@ if(isset($_GET['id'])) {
 
         $delete = $conn->prepare("DELETE FROM categories WHERE id = '" . $_GET['id'] . "'");
         $delete->execute();
-        echo '<script>window.location="http://localhost:8100/admin-panel/categories-admins/show-categories.php";</script>';
+        echo '<script>window.location="../categories-admins/show-categories.php";</script>';
 
     } catch(PDOException $e) {
         $e->getMessage();

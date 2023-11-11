@@ -26,7 +26,7 @@ if(isset($_GET['id'])) {
 
         $delete = $conn->prepare("DELETE FROM products WHERE id = '" . $_GET['id'] . "'");
         $delete->execute();
-        echo '<script>window.location="http://localhost:8100/admin-panel/products-admins/show-products.php";</script>';
+        echo '<script>window.location="../products-admins/show-products.php";</script>';
 
     } catch(PDOException $e) {
         $e->getMessage();

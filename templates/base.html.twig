@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} - eTicket</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+{% if a == '1' %}
+    <div class="relative h-screen lg:h-screen w-full bg-cover bg-no-repeat" style="background-image: url(https://media.istockphoto.com/id/166186307/photo/reserved-theater-seats.jpg?s=612x612&w=0&k=20&c=tPSyXZPjmU2ZmFocpKI2_TeQZQwgGetJUsEkpOw7ANY=);">
+{% else %}
+    <div class="relative h-screen lg:h-24 w-full bg-cover bg-no-repeat bg-red-900">
+{% endif %}
+
+    <header class="text-neutral-200 container relative mx-auto flex flex-col overflow-hidden px-4 py-4 lg:flex-row lg:items-center">
+        <a href="/" class="flex items-center whitespace-nowrap text-3xl font-bold">
+    <span class="mr-2 w-16">
+      <img src="{{ asset('images/logo.png') }}" alt="" />
+    </span>
+            eTicket
+        </a>
+        <input type="checkbox" class="peer hidden" id="navbar-open" />
+        <label class="absolute top-5 right-5 cursor-pointer lg:hidden" for="navbar-open">
+            <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </label>
+        <nav aria-label="Header Navigation" class="peer-checked:pt-8 peer-checked:max-h-60 flex max-h-0 w-full flex-col items-center overflow-hidden transition-all lg:ml-24 lg:max-h-full lg:flex-row">
+            <ul class="flex w-full flex-col items-center space-y-2 lg:flex-row lg:justify-center lg:space-y-0">
+                <li class="lg:mr-12"><a class="underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit text-neutral-200 rounded" href="/popular">Popular</a></li>
+                <li class="lg:mr-12"><a class="underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit text-neutral-200 rounded" href="/romanian-movies">Romanian Night</a></li>
+                <li class="lg:mr-12"><a class="underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit text-neutral-200 rounded" href="/french-movies">Films français</a></li>
+                <li class="lg:mr-12"><a class="underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit text-neutral-200 rounded" href="/contact">Contact Us</a></li>
+            </ul>
+            <hr class="mt-4 w-full lg:hidden" />
+            <div class="my-4 flex items-center space-x-6 space-y-2 lg:my-0 lg:ml-auto lg:space-x-8 lg:space-y-0">
+                <a href="/login" title="" class="whitespace-nowrap rounded font-medium underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit text-neutral-200 "> Log in </a>
+                <a href="/register" title="" class="whitespace-nowrap rounded-full bg-pink-500 px-5 py-2 font-medium text-white transition-all duration-200 hover:bg-pink-600 hover:bg-transparent border-pink-500 border-2">Get free account</a>
+            </div>
+        </nav>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer class="relative mt-20 bg-gray-900 px-4 pt-14">
+        <div class="absolute -top-10 left-1/2 h-16 w-16 -translate-x-1/2 rounded-xl border-4 border-sky-500 bg-white p-2"><img class="h-full object-contain" src="{{ asset('images/logo.png') }}" alt="" /></div>
+        <nav aria-label="Footer Navigation" class="mx-auto mb-1 flex max-w-lg flex-col gap-x-8 gap-y-2 text-center sm:flex-row sm:text-center">
+            <a href="/" class="font-medium text-white underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit rounded">Home</a>
+            <a href="/popular" class="font-medium text-white underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit rounded">Popular</a>
+            <a href="/romanian-movies" class="font-medium text-white underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit rounded">Romanian Night</a>
+            <a href="/french-movies" class="font-medium text-white underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit rounded">Films français</a>
+            <a href="/contact" class="font-medium text-white underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit rounded">Contact Us</a>
+        </nav>
+        <p class="py-5 text-center text-gray-300">&copy; {{ 'now' | date('Y') }} Marius Sandulache | All Rights Reserved</p>
+    </footer>
+
+</div>
+</body>
+</html>

@@ -23,7 +23,7 @@ if(isset($_POST['submit'])) {
             ':created_at' => date('Y-m-d, H:i:s'),
         ]);
 
-        echo '<script>window.location="http://localhost:8100/admin-panel/admins/admins.php";</script>';
+        echo '<script>window.location="../admins/admins.php";</script>';
 
     }
 }
