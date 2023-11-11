@@ -11,3 +11,8 @@ define("IMG", URL . "public/img/");
 define("__VIEW__", "/templates/");
 define("__CONTROLLER__", "Controller/");
 define("__APP__", __DIR__ . '/../src/');
+
+define("HOST", "database");
+define("DB_NAME", "e_ticket");
+define("USER", "marius");
+define("PASSWORD", "pass");

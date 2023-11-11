@@ -1,0 +1,16 @@
+{% if movie.release_date|date('Y') == ('now' | date('Y')) %}
+    <article class="mx-auto my-4 flex w-full flex-col overflow-hidden rounded-2xl border border-gray-300 bg-white text-gray-900 transition hover:translate-y-2 hover:shadow-lg">
+        <a href="/movie/{{ movie.tmdb_id }}">
+            <img src="https://image.tmdb.org/t/p/w300/{{ movie.poster_path }}" class="h-56 w-full object-cover" alt="" />
+            <div class="flex-auto px-6 py-5">
+              <span class="mb-2 flex items-center text-sm font-semibold">
+                <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.272 10.445L18 2m-8.684 8.632L5 2m7.761 8.048L8.835 2m5.525 0l-1.04 2.5M6 16a6 6 0 1 0 12 0a6 6 0 0 0-12 0Z" /></svg>
+                {{ movie.vote_average | number_format(1) }}</span
+              >
+                <h3 class="mt-4 mb-3 text-xl font-semibold xl:text-2xl">{{ movie.original_title }}</h3>
+                <p class="mb-4 text-base font-light">{{ movie.overview | slice(0, 100) ~ ' ...' }}</p>
+                <span class="inline-block cursor-pointer select-none rounded-full border border-red-600 bg-red-600 px-4 py-1 text-center align-middle text-sm font-semibold leading-normal text-white no-underline shadow-sm hover:bg-transparent hover:text-red-600">View details</span>
+            </div>
+        </a>
+    </article>
+{% endif %}

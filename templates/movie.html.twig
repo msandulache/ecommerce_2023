@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    eTicket - Login
+{% endblock %}
+
+{% block body %}
+
+    <section class="text-gray-700 body-font overflow-hidden bg-white">
+
+        <div class="container px-5 pt-12 pb-2 mx-auto">
+            <div class="lg:w-4/5 mx-auto flex flex-wrap">
+                <ul class="flex m-0 items-center p-0 mb-4">
+                    <li class="text-left">
+                        <a href="/" title="" class="cursor-pointer text-gray-400 hover:text-gray-900">
+                            <!-- Heroicons - Home -->
+                            <svg class="block h-5 w-5 align-middle" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path strokeLinecap="round" strokeLinejoin="round"
+                                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                            </svg>
+                        </a>
+                    </li>
+
+                    <li class="flex items-center text-left">
+                        <svg class="block h-5 w-5 align-middle text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                             fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                            <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"></path>
+                        </svg>
+
+                        <span class="text-sm font-normal leading-5 text-gray-400 ">{{ movie.title }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container px-5 pt-2 pb-16 mx-auto">
+            <div class="lg:w-4/5 mx-auto flex flex-wrap">
+                <img alt="ecommerce" class="object-cover object-center rounded border border-gray-200"
+                     src="{{ movie.poster_path }}">
+                <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+                    <h2 class="text-sm title-font text-red-500 tracking-widest">{{ movie.tagline }}</h2>
+                    <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ movie.title }}</h1>
+                    <div class="flex mb-4">
+                        {% include 'common/_movie_rate_stars.html.twig' with {'vote_average': movie.vote_average} %}
+                        <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 text-gray-400">
+                                {{ movie.genres }}
+                            </span>
+                    </div>
+                    <p class="leading-relaxed">{{ movie.short_description }}</p>
+                    <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
+                        <div class="flex text-gray-600">
+                            <span class="mr-3"><b>Status:</b> {{ movie.status }}</span>
+                        </div>
+                        <div class="flex ml-6 items-center text-gray-600">
+                            <span class="mr-3"><b>Release date:</b> {{ movie.release_date|date("d.m.Y") }}</span>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <span class="title-font font-medium text-2xl text-gray-900">${{ random(250, 400) /100 }}</span>
+                        <a href="/registerd" title=""
+                           class="flex ml-auto whitespace-nowrap rounded-full bg-red-500 px-6 py-2 font-medium text-white transition-all duration-200 hover:bg-red-500 hover:bg-transparent hover:text-red-500 border-red-500 border-2">Buy
+                            Tickets</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="recommendations">
+        <h1 class="mb-12 text-center font-sans text-3xl font-bold">Recommendations</h1>
+        <div class="mx-auto grid max-w-screen-lg justify-center px-4 sm:grid-cols-2 sm:gap-4 sm:px-8 md:grid-cols-3">
+            {% for movie in recommendations[0:3] %}
+                {% include 'common/_movie_card.html.twig' with movie %}
+            {% endfor %}
+        </div>
+    </section>
+
+{% endblock %}

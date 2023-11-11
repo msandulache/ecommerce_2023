@@ -23,7 +23,7 @@ run:
 docker compose exec php bash
 
 php vendor/bin/phinx migrate
-php vendor/bin/phinx seed:run -s GenreSeeder
+php vendor/bin/phinx seed:run
 
 (for database migration I use Phinx)
 https://book.cakephp.org/phinx/0/en/index.html
