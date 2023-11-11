@@ -11,7 +11,7 @@ if ( $_SERVER['REQUEST_METHOD']=='GET' && realpath(__FILE__) == realpath( $_SERV
 }
 
 if(isset($_SESSION['username'])) {
-    echo '<script>window.location="' . APP_URL . 'index.php";</script>';
+    echo '<script>window.location="' . APP_URL . 'index_old.php";</script>';
 }
 
 if(

@@ -1,6 +1,26 @@
 {
+    "name": "msandulache/eticket",
+    "description": "Order online a movie ticket",
+    "authors": [
+        {
+            "name": "Marius Sandulache",
+            "email": "mariussandulache2015@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
     "require": {
         "stripe/stripe-php": "^13.2",
-        "fakerphp/faker": "^1.23"
+        "fakerphp/faker": "^1.23",
+        "guzzlehttp/guzzle": "^7.8",
+        "twig/twig": "^3.7"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9",
+        "phpspec/prophecy-phpunit": "^2.0"
     }
 }

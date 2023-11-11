@@ -50,7 +50,7 @@ define("URL", 'http://localhost:8100/');
                 <?php endif; ?>
                 <ul class="navbar-nav ml-md-auto d-md-flex">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home
+                        <a class="nav-link" href="index_old.php">Home
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>

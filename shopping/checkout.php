@@ -8,7 +8,7 @@
     }
 
     if(!isset($_SESSION['username'])) {
-        echo '<script>window.location="' . APP_URL . 'index.php";</script>';
+        echo '<script>window.location="' . APP_URL . 'index_old.php";</script>';
     }
 ?>
 

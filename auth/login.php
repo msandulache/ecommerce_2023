@@ -3,7 +3,7 @@ include_once '../config/config.php';
 include_once '../includes/header.php';
 
 if(isset($_SESSION['username'])) {
-    echo '<script>window.location="' . APP_URL . 'index.php";</script>';
+    echo '<script>window.location="' . APP_URL . 'index_old.php";</script>';
 }
 
 if(isset($_POST['submit'])) {
@@ -23,7 +23,7 @@ if(isset($_POST['submit'])) {
                 $_SESSION['username'] = $fetch['username'];
                 $_SESSION['user_id'] = $fetch['id'];
 
-                echo '<script>window.location="' . APP_URL . 'index.php";</script>';
+                echo '<script>window.location="' . APP_URL . 'index_old.php";</script>';
             } else {
                 echo "<script>alert('email or password are wrong');</script>";
             }

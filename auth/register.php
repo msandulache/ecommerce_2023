@@ -3,7 +3,7 @@
     include_once '../includes/header.php';
 
     if(isset($_SESSION['username'])) {
-        echo '<script>window.location="' . APP_URL . 'index.php";</script>';
+        echo '<script>window.location="' . APP_URL . 'index_old.php";</script>';
     }
 
     if(isset($_POST['submit'])) {

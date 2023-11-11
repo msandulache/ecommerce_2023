@@ -7,7 +7,7 @@
             <p class="lead">
                 The page you are looking for doesn't exist!
             </p>
-            <a href="index.php" class="btn btn-primary">Go home!</a>
+            <a href="index_old.php" class="btn btn-primary">Go home!</a>
         </div>
     </div>
 <?php require "includes/footer.php"; ?>

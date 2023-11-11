@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
                 $_SESSION['adminname'] = $fetch['adminname'];
                 $_SESSION['admin_id'] = $fetch['id'];
 
-                echo '<script>window.location="' . ADMIN_URL . 'index.php";</script>';
+                echo '<script>window.location="' . ADMIN_URL . 'index_old.php";</script>';
 
                 echo 'LOGGED IN';
                 exit;

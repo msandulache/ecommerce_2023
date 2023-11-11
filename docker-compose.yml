@@ -1,24 +1,15 @@
-# ./docker-compose.yml
-
-version: '3'
+version: '3.8'
 
 services:
-  php:
-    container_name: php
-    build: .
-    ports:
-      - "8100:80"
-    volumes:
-      - ./:/var/www/html/
   database:
     container_name: database
     image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: php_master
-      MYSQL_USER: php_master
-      MYSQL_PASSWORD: secret
+      MYSQL_DATABASE: e_ticket
+      MYSQL_USER: marius
+      MYSQL_PASSWORD: pass
     ports:
       - '4306:3306'
     volumes:
@@ -30,3 +21,17 @@ services:
       - 8081:8080
     depends_on:
       - database
+  php:
+    container_name: php
+    build: .
+    ports:
+        - "8100:80"
+    volumes:
+        - ./:/var/www/html/
+    depends_on:
+      - database
+  mailer:
+    image: schickling/mailcatcher
+    ports:
+      - 1025:1025
+      - 1080:1080
