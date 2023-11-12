@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    eTicket - Login
+    {{ movie.title }}
 {% endblock %}
 
-{% block body %}
+{% block content %}
 
     <section class="text-gray-700 body-font overflow-hidden bg-white">
 
@@ -13,7 +13,6 @@
                 <ul class="flex m-0 items-center p-0 mb-4">
                     <li class="text-left">
                         <a href="/" title="" class="cursor-pointer text-gray-400 hover:text-gray-900">
-                            <!-- Heroicons - Home -->
                             <svg class="block h-5 w-5 align-middle" xmlns="http://www.w3.org/2000/svg" fill="none"
                                  viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path strokeLinecap="round" strokeLinejoin="round"
@@ -36,12 +35,12 @@
         <div class="container px-5 pt-2 pb-16 mx-auto">
             <div class="lg:w-4/5 mx-auto flex flex-wrap">
                 <img alt="ecommerce" class="object-cover object-center rounded border border-gray-200"
-                     src="{{ movie.poster_path }}">
+                     src="https://image.tmdb.org/t/p/w300/{{ movie.poster_path }}">
                 <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                     <h2 class="text-sm title-font text-red-500 tracking-widest">{{ movie.tagline }}</h2>
                     <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ movie.title }}</h1>
                     <div class="flex mb-4">
-                        {% include 'common/_movie_rate_stars.html.twig' with {'vote_average': movie.vote_average} %}
+{# {% include 'common/_movie_rate_stars.html.twig' with {'vote_average': movie.vote_average} %} #}
                         <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 text-gray-400">
                                 {{ movie.genres }}
                             </span>
@@ -57,9 +56,20 @@
                     </div>
                     <div class="flex">
                         <span class="title-font font-medium text-2xl text-gray-900">${{ random(250, 400) /100 }}</span>
-                        <a href="/registerd" title=""
-                           class="flex ml-auto whitespace-nowrap rounded-full bg-red-500 px-6 py-2 font-medium text-white transition-all duration-200 hover:bg-red-500 hover:bg-transparent hover:text-red-500 border-red-500 border-2">Buy
-                            Tickets</a>
+
+
+                        <form id="form-data">
+                            <input type="hidden" value="{{ user_id }}" id="user_id" name="user_id"/>
+                            <input type="hidden" value="{{ movie.title }}" id="name" name="name"/>
+                            <input type="hidden" value="{{ movie.poster_path }}" id="image" name="image"/>
+                            <input type="hidden" value="{{ random(250, 400) /100 }}" id="price" name="price"/>
+
+                            <input type="text" id="amount" name="amount" value="1" />
+                            <button id="submit" type="button" title=""
+                                    class="flex ml-auto whitespace-nowrap rounded-full bg-red-500 px-6 py-2 font-medium text-white transition-all duration-200 hover:bg-red-500 hover:bg-transparent hover:text-red-500 border-red-500 border-2">Buy
+                                Tickets</button>
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -74,5 +84,31 @@
             {% endfor %}
         </div>
     </section>
+
+    <script>
+        $(document).ready(function(){
+
+            $("#submit").on("click",function(e) {
+                if($('#user_id').val() == '') {
+                    alert('please log in first');
+                } else {
+                    e.preventDefault();
+                    var formdata = $("#form-data").serialize() + '&submit=submit';
+
+                    $.ajax({
+                        type: 'post',
+                        url: '/ajax_to_cart.php',
+                        data: formdata,
+
+                        success: function() {
+                            console.log('added to cart successfully');
+                            $("#submit").html('<i class="fas fa-shopping-cart"></i> Added to cart').prop("disabled", true);
+                            location.reload();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 
 {% endblock %}

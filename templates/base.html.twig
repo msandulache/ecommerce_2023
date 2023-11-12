@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %} - eTicket</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://kit.fontawesome.com/5c5946fe44.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" ></script>
 </head>
 <body>
 {% if a == '1' %}
@@ -35,10 +35,23 @@
                 <li class="lg:mr-12"><a class="underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit text-neutral-200 rounded" href="/contact">Contact Us</a></li>
             </ul>
             <hr class="mt-4 w-full lg:hidden" />
-            <div class="my-4 flex items-center space-x-6 space-y-2 lg:my-0 lg:ml-auto lg:space-x-8 lg:space-y-0">
-                <a href="/login" title="" class="whitespace-nowrap rounded font-medium underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit text-neutral-200 "> Log in </a>
-                <a href="/register" title="" class="whitespace-nowrap rounded-full bg-pink-500 px-5 py-2 font-medium text-white transition-all duration-200 hover:bg-pink-600 hover:bg-transparent border-pink-500 border-2">Get free account</a>
-            </div>
+            {% if user_id != 0 %}
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="http://localhost:8100/users/orders.php">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Dropdown menu</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><a class="dropdown-item" href="logout">Log out</a></li>
+                </ul>
+
+
+            {% else %}
+                <div class="my-4 flex items-center space-x-6 space-y-2 lg:my-0 lg:ml-auto lg:space-x-8 lg:space-y-0">
+                    <a href="/login" title="" class="whitespace-nowrap rounded font-medium underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit text-neutral-200 "> Log in </a>
+                    <a href="/register" title="" class="whitespace-nowrap rounded-full bg-pink-500 px-5 py-2 font-medium text-white transition-all duration-200 hover:bg-pink-600 hover:bg-transparent border-pink-500 border-2">Get free account</a>
+                </div>
+            {% endif %}
+
         </nav>
     </header>
 

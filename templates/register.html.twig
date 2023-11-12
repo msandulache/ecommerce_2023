@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
+    <div class="pt-5 pb-1">
+
+        {% if error %}
+            {{ error }}
+        {% endif %}
+
+        <div class="lg:m-10">
+            <form action="" method="POST" class="relative border border-gray-100 space-y-3 max-w-screen-md mx-auto rounded-md bg-white p-6 shadow-xl lg:p-10">
+                <h1 class="mb-6 text-xl font-semibold lg:text-2xl">Register</h1>
+
+                <div class="grid gap-3 md:grid-cols-2">
+                    <div>
+                        <label class=""> First Name </label>
+                        <input name="firstname" type="text" placeholder="Your Name"
+                               class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"/>
+                    </div>
+                    <div>
+                        <label class=""> Last Name </label>
+                        <input name="lastname" type="text" placeholder="Last  Name"
+                               class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"/>
+                    </div>
+                </div>
+                <div>
+                    <label class=""> Username </label>
+                    <input name="username" type="text" placeholder="Username" class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"/>
+                </div>
+                <div>
+                    <label class=""> Email Address </label>
+                    <input name="email" type="email" placeholder="Info@example.com"
+                           class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"/>
+                </div>
+                <div>
+                    <label class=""> Password </label>
+                    <input name="password" type="password" placeholder="******" class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"/>
+                </div>
+
+                <div class="checkbox">
+                    <input name="chekcbox1" type="checkbox" id="chekcbox1" checked=""/>
+                    <label for="checkbox1">I agree to the <a href="#" target="_blank" class="text-blue-600"> Terms and
+                            Conditions </a> </label>
+                </div>
+
+                <div>
+                    <input type="hidden" name="submit" value="1" />
+                    <button type="submit"
+                            class="mt-5 w-full rounded-md bg-blue-600 p-2 text-center font-semibold text-white">Get
+                        Started
+                    </button>
+                </div>
+            </form>
+
+        </div>
+
+
+    </div>
+{% endblock %}

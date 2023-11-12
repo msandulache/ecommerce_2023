@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class GenresTableMigration extends AbstractMigration
+final class UsersTableMigration extends AbstractMigration
 {
     /**
      * Change Method.
@@ -19,10 +19,13 @@ final class GenresTableMigration extends AbstractMigration
      */
     public function change(): void
     {
-        $table = $this->table('genres');
+        $table = $this->table('users');
 
-        $table->addColumn('tmdb_id', 'integer')
-            ->addColumn('name', 'string')
+        $table->addColumn('firstname', 'string')
+            ->addColumn('lastname', 'string')
+            ->addColumn('username', 'string')
+            ->addColumn('email', 'string')
+            ->addColumn('password', 'string')
             ->addTimestamps();
 
         $table->create();

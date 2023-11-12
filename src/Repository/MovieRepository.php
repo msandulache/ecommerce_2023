@@ -20,4 +20,17 @@ class MovieRepository extends Repository
 
         return [];
     }
+
+    public function findByTmdbId($tmdbId)
+    {
+        $selectMovie = $this->db->query("SELECT * FROM movies WHERE tmdb_id = '" . $tmdbId . "'");
+        $selectMovie->execute();
+        $movie = $selectMovie->fetch(\PDO::FETCH_ASSOC);
+
+        if(!empty($movie)) {
+            return $movie;
+        }
+
+        return [];
+    }
 }
