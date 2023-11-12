@@ -11,6 +11,7 @@ use Twig\TwigFunction;
 use App\Repository\MovieRepository;
 use App\Repository\UserRepository;
 use App\Repository\CartRepository;
+use App\Router;
 
 try {
 
@@ -27,6 +28,15 @@ try {
     } else {
         $userId = 0;
     }
+
+//    $router = new Router();
+//
+//    $router->addRoute('GET', '/blogs', function () {
+//        echo "My route is working!";
+//        exit;
+//    });
+//
+//    $router->matchRoute();
 
     if ($_SERVER['REQUEST_URI'] == '/') {
         $movieRepository = new MovieRepository();
@@ -92,9 +102,27 @@ try {
 
         $cartRepository = new CartRepository();
         $items = $cartRepository->showItems();
-        echo $twig->render('cart.html.twig', ['a' => 1, 'user_id' => $userId, 'items' => $items]);
+        echo $twig->render('cart.html.twig', ['a' => 0, 'user_id' => $userId, 'items' => $items]);
     } else if (str_contains($_SERVER['REQUEST_URI'], '/thank-you')) {
-        echo $twig->render('thank-you.html.twig', ['a' => 1, 'user_id' => $userId]);
+        echo $twig->render('thank-you.html.twig', ['a' => 0, 'user_id' => $userId]);
+    } else if (str_contains($_SERVER['REQUEST_URI'], '/checkout')) {
+        echo $twig->render('checkout.html.twig', ['a' => 0, 'user_id' => $userId]);
+    } else if (str_contains($_SERVER['REQUEST_URI'], '/charge')) {
+
+        \Stripe\Stripe::setApiKey($stripeSecretKey);
+        $token = $_POST['stripeToken'];
+
+        $charge = \Stripe\Charge::create(
+            array(
+                'amount' => (isset($_SESSION['price']) ? (int)number_format($_SESSION['price'], 2) * 100: '0'),
+                'currency' => 'ron',
+                'source' => $token
+            )
+        );
+
+        $cart = new CartRepository();
+        $cart->deleteAllItems();
+        echo $twig->render('thank-you.html.twig', ['a' => 0, 'user_id' => $userId]);
     } else {
         echo $twig->render('404.html.twig', ['a' => 0, 'user_id' => $userId, ]);
     }
