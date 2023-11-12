@@ -36,8 +36,8 @@ final class MoviesTableMigration extends AbstractMigration
             ->addColumn('vote_count', 'integer')
             ->addColumn('category_id', 'integer')
             ->addColumn('release_date', 'date')
-            ->addForeignKey('category_id', 'categories', ['id'],
-                ['constraint' => 'movies_category_id']);
+           /* ->addForeignKey('category_id', 'categories', ['id'],
+                ['constraint' => 'movies_category_id']);*/
             ->addTimestamps();
 
         $table->create();
