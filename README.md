@@ -81,12 +81,5 @@ http://localhost:8081/
 ## Author
 
 - [Marius Sandulache](https://github.com/msandulache)
-## Contributing
 
-Contributions are always welcome!
-
-
-## Feedback
-
-If you have any feedback, please reach out to us at mariussandulache2015@gmail.com
 
