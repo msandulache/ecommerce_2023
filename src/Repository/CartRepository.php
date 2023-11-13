@@ -20,12 +20,16 @@ VALUES (:user_id, :name, :image, :price, :amount, :created_at)");
 
     public function showItems()
     {
-        $products = $this->db->query("SELECT * FROM cart WHERE user_id = '" . $_SESSION['user_id'] . "'");
-        $products->execute();
+        if(isset($_SESSION['user_id'])) {
+            $products = $this->db->query("SELECT * FROM cart WHERE user_id = '" . $_SESSION['user_id'] . "'");
+            $products->execute();
 
-        $allProducts = $products->fetchAll(\PDO::FETCH_OBJ);
+            $allProducts = $products->fetchAll(\PDO::FETCH_OBJ);
 
-        return $allProducts;
+            return $allProducts;
+        } else {
+            return [];
+        }
     }
 
     public function deleteItem($id)
