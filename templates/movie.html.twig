@@ -20,14 +20,20 @@
                             </svg>
                         </a>
                     </li>
-
+                    <li class="flex items-center text-left mx-2">
+                        <span class="text-sm font-normal leading-5 text-gray-400 ">/</span>
+                    </li>
                     <li class="flex items-center text-left">
-                        <svg class="block h-5 w-5 align-middle text-gray-400" xmlns="http://www.w3.org/2000/svg"
-                             fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                            <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"></path>
-                        </svg>
-
-                        <span class="text-sm font-normal leading-5 text-gray-400 ">{{ movie.title }}</span>
+                        <a href="/{{ movie.category_name|lower|replace({' ': '-'}) }}" title=""
+                           class="cursor-pointer text-gray-400 hover:text-gray-900">
+                            <span class="">{{ movie.category_name }}</span>
+                        </a>
+                    </li>
+                    <li class="flex items-center text-left mx-2">
+                        <span class="text-sm font-normal leading-5 text-gray-400 ">/</span>
+                    </li>
+                    <li class="flex items-center text-left">
+                        <span class="font-normal leading-5 text-gray-400 ">{{ movie.title }}</span>
                     </li>
                 </ul>
             </div>
@@ -39,45 +45,59 @@
                 <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                     <h2 class="text-sm title-font text-red-500 tracking-widest">{{ movie.tagline }}</h2>
                     <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ movie.title }}</h1>
+                    <h2 class="text-sm title-font text-red-500 tracking-widest my-4">Original
+                        title: {{ movie.original_title }} ({{ movie.original_language }})</h2>
                     <div class="flex mb-4">
-{# {% include 'common/_movie_rate_stars.html.twig' with {'vote_average': movie.vote_average} %} #}
+                        {% include 'common/_movie_rate_stars.html.twig' with {'vote_average': movie.vote_average} %}
                         <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 text-gray-400">
-                                {{ movie.genres }}
+                                Genres {{ movie.genre_ids }}
                             </span>
                     </div>
-                    <p class="leading-relaxed">{{ movie.short_description }}</p>
                     <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
                         <div class="flex text-gray-600">
-                            <span class="mr-3"><b>Status:</b> {{ movie.status }}</span>
+                            <span class="mr-3"><b>Vote count:</b> {{ movie.vote_count }}</span>
                         </div>
                         <div class="flex ml-6 items-center text-gray-600">
                             <span class="mr-3"><b>Release date:</b> {{ movie.release_date|date("d.m.Y") }}</span>
                         </div>
                     </div>
-                    <div class="flex">
-                        <span class="title-font font-medium text-2xl text-gray-900">${{ random(250, 400) /100 }}</span>
 
+                    <p class="leading-relaxed">{{ movie.overview }}</p>
 
-                        <form id="form-data">
+                    <form id="form-data">
+
+                        <div class="flex mt-6 items-center pb-5 mb-5">
+                            <div class="flex text-red-500 text-3xl">
+                                ${{ random(250, 400) /100 }}
+                            </div>
+                            <div class="flex ml-6 items-center text-gray-600">
+                                <input type="text" id="amount" name="amount"
+                                       class="w-full rounded-md border border-gray-200 py-2 px-4 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                                       placeholder="1" value=""/>
+                            </div>
+                        </div>
+
+                        <div class="flex mt-9 items-center pb-5 mb-5">
+
                             <input type="hidden" value="{{ user_id }}" id="user_id" name="user_id"/>
                             <input type="hidden" value="{{ movie.title }}" id="name" name="name"/>
                             <input type="hidden" value="{{ movie.poster_path }}" id="image" name="image"/>
                             <input type="hidden" value="{{ random(250, 400) /100 }}" id="price" name="price"/>
 
-                            <input type="text" id="amount" name="amount" value="1" />
                             <button id="submit" type="button" title=""
-                                    class="flex ml-auto whitespace-nowrap rounded-full bg-red-500 px-6 py-2 font-medium text-white transition-all duration-200 hover:bg-red-500 hover:bg-transparent hover:text-red-500 border-red-500 border-2">Buy
-                                Tickets</button>
-                        </form>
+                                    class="flex ml-auto mr-auto whitespace-nowrap rounded-full bg-red-500 px-6 py-2 font-medium text-white transition-all duration-200 hover:bg-red-500 hover:bg-transparent hover:text-red-500 border-red-500 border-2">
+                                Buy Tickets
+                            </button>
 
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="recommendations">
-        <h1 class="mb-12 text-center font-sans text-3xl font-bold">Recommendations</h1>
+        <h1 class="mb-12 text-center font-sans text-3xl font-bold">Recommendations (TODO)</h1>
         <div class="mx-auto grid max-w-screen-lg justify-center px-4 sm:grid-cols-2 sm:gap-4 sm:px-8 md:grid-cols-3">
             {% for movie in recommendations[0:3] %}
                 {% include 'common/_movie_card.html.twig' with movie %}
@@ -86,10 +106,10 @@
     </section>
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
 
-            $("#submit").on("click",function(e) {
-                if($('#user_id').val() == '') {
+            $("#submit").on("click", function (e) {
+                if ($('#user_id').val() == '') {
                     alert('please log in first');
                 } else {
                     e.preventDefault();
@@ -100,7 +120,7 @@
                         url: '/ajax_to_cart.php',
                         data: formdata,
 
-                        success: function() {
+                        success: function () {
                             console.log('added to cart successfully');
                             $("#submit").html('<i class="fas fa-shopping-cart"></i> Added to cart').prop("disabled", true);
                             location.reload();

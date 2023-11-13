@@ -23,7 +23,12 @@ class MovieRepository extends Repository
 
     public function findByTmdbId($tmdbId)
     {
-        $selectMovie = $this->db->query("SELECT * FROM movies WHERE tmdb_id = '" . $tmdbId . "'");
+        $sql = "SELECT m.*, c.name as category_name 
+                FROM movies AS m
+                LEFT JOIN categories AS c ON c.id = m.category_id 
+                WHERE m.tmdb_id = '" . $tmdbId . "'";
+
+        $selectMovie = $this->db->query($sql);
         $selectMovie->execute();
         $movie = $selectMovie->fetch(\PDO::FETCH_ASSOC);
 

@@ -1,7 +1,7 @@
 {% if movie.release_date|date('Y') == ('now' | date('Y')) %}
     <article class="mx-auto my-4 flex w-full flex-col overflow-hidden rounded-2xl border border-gray-300 bg-white text-gray-900 transition hover:translate-y-2 hover:shadow-lg">
         <a href="/movie/{{ movie.tmdb_id }}">
-            <img src="https://image.tmdb.org/t/p/w300/{{ movie.poster_path }}" class="h-56 w-full object-cover" alt="" />
+            <img src="https://image.tmdb.org/t/p/w300/{{ movie.backdrop_path }}" class="h-56 w-full object-cover" alt="" />
             <div class="flex-auto px-6 py-5">
               <span class="mb-2 flex items-center text-sm font-semibold">
                 <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.272 10.445L18 2m-8.684 8.632L5 2m7.761 8.048L8.835 2m5.525 0l-1.04 2.5M6 16a6 6 0 1 0 12 0a6 6 0 0 0-12 0Z" /></svg>
