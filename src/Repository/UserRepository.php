@@ -64,6 +64,14 @@ class UserRepository extends Repository
                     ':created_at' => date("Y-m-d H:i:s"),
                 ]);
 
+                $login = $this->db->query("SELECT * FROM users WHERE username = '$username'");
+                $login->execute();
+
+                $fetch = $login->fetch(\PDO::FETCH_ASSOC);
+
+                $_SESSION['username'] = $username;
+                $_SESSION['user_id'] = $fetch['id'];
+
                 return true;
             }
         }

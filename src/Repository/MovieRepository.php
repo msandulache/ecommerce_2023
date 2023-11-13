@@ -33,6 +33,11 @@ class MovieRepository extends Repository
         $movie = $selectMovie->fetch(\PDO::FETCH_ASSOC);
 
         if(!empty($movie)) {
+            $sqlGenres = "SELECT * FROM genres WHERE tmdb_id IN (" . $movie['genre_ids'] . ")";
+            $selectGenres = $this->db->query($sqlGenres);
+            $selectGenres->execute();
+            $movie['genres'] = $selectGenres->fetchAll(\PDO::FETCH_ASSOC);
+
             return $movie;
         }
 

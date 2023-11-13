@@ -54,6 +54,7 @@ class PopularMoviesSeeder extends AbstractSeed
                     'vote_count' => $movie['vote_count'],
                     'category_id' => $category['id'],
                     'release_date' => $movie['release_date'],
+                    'price' => rand(250, 400) /100
                 ];
             }
 

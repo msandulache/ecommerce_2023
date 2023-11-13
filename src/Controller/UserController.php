@@ -22,8 +22,13 @@ class UserController extends Controller
         if($userRepository->register()) {
             header('Location: http://localhost:8100/');
         } else {
-            echo $this->twig->render('register.html.twig', ['a' => 0, 'user_id' => $this->userId, 'error' => $userRepository->error]);
+            $this->showRegisterForm();
         }
+    }
+
+    public function showRegisterForm()
+    {
+        echo $this->twig->render('register.html.twig', ['a' => 0, 'user_id' => $this->userId]);
     }
 
     public function logout(UserRepository $userRepository)

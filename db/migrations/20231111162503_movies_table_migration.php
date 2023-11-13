@@ -31,11 +31,12 @@ final class MoviesTableMigration extends AbstractMigration
             ->addColumn('poster_path', 'string')
             ->addColumn('adult', 'boolean')
             ->addColumn('video', 'boolean')
-            ->addColumn('popularity', 'decimal')
-            ->addColumn('vote_average', 'decimal')
+            ->addColumn('popularity', 'decimal', ['precision' => 5, 'scale' => 2])
+            ->addColumn('vote_average', 'decimal', ['precision' => 5, 'scale' => 2])
             ->addColumn('vote_count', 'integer')
             ->addColumn('category_id', 'integer')
             ->addColumn('release_date', 'date')
+            ->addColumn('price', 'decimal', ['precision' => 5, 'scale' => 2])
            /* ->addForeignKey('category_id', 'categories', ['id'],
                 ['constraint' => 'movies_category_id']);*/
             ->addTimestamps();

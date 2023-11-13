@@ -45,12 +45,19 @@
                 <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                     <h2 class="text-sm title-font text-red-500 tracking-widest">{{ movie.tagline }}</h2>
                     <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ movie.title }}</h1>
-                    <h2 class="text-sm title-font text-red-500 tracking-widest my-4">Original
+
+                    {% if movie.original_language != 'en' %}
+                        <h2 class="text-sm title-font text-red-500 tracking-widest my-4">Original
                         title: {{ movie.original_title }} ({{ movie.original_language }})</h2>
-                    <div class="flex mb-4">
+                    {% endif %}
+
+                    <div class="flex mb-4 mt-4">
                         {% include 'common/_movie_rate_stars.html.twig' with {'vote_average': movie.vote_average} %}
                         <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 text-gray-400">
-                                Genres {{ movie.genre_ids }}
+                            {% for genre in movie.genres %}
+                                <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">{{ genre.name }}</span>
+                                &nbsp;
+                            {% endfor %}
                             </span>
                     </div>
                     <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
@@ -62,18 +69,21 @@
                         </div>
                     </div>
 
-                    <p class="leading-relaxed">{{ movie.overview }}</p>
+                    <p class="leading-loose">{{ movie.overview }}</p>
 
                     <form id="form-data">
 
-                        <div class="flex mt-6 items-center pb-5 mb-5">
+                        <div class="flex mt-6 items-center">
                             <div class="flex text-red-500 text-3xl">
-                                ${{ random(250, 400) /100 }}
+                                $ {{ movie.price }}
                             </div>
-                            <div class="flex ml-6 items-center text-gray-600">
+                        </div>
+
+                        <div class="flex mt-6 items-center ">
+                            <div class="flexitems-center text-gray-600">
                                 <input type="text" id="amount" name="amount"
                                        class="w-full rounded-md border border-gray-200 py-2 px-4 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-                                       placeholder="1" value=""/>
+                                       value="1"/>
                             </div>
                         </div>
 
@@ -84,10 +94,17 @@
                             <input type="hidden" value="{{ movie.poster_path }}" id="image" name="image"/>
                             <input type="hidden" value="{{ random(250, 400) /100 }}" id="price" name="price"/>
 
+                            {% if user_id != 0 %}
                             <button id="submit" type="button" title=""
-                                    class="flex ml-auto mr-auto whitespace-nowrap rounded-full bg-red-500 px-6 py-2 font-medium text-white transition-all duration-200 hover:bg-red-500 hover:bg-transparent hover:text-red-500 border-red-500 border-2">
+                                    class="flex whitespace-nowrap rounded-full bg-red-500 px-6 py-2 font-medium text-white transition-all duration-200 hover:bg-red-500 hover:bg-transparent hover:text-red-500 border-red-500 border-2">
                                 Buy Tickets
                             </button>
+                            {% else %}
+
+                                <div class="inline-flex items-center rounded-md bg-red-50 px-6 py-2 font-medium text-red-700 ring-1 ring-inset ring-red-600/10" role="alert">
+                                    <p>Please <u><a href="/login">log in</a></u> or <u><a href="/register">register</a></u> first to buy ticktes</p>
+                                </div>
+                            {% endif %}
 
                         </div>
                     </form>

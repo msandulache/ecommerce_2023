@@ -27,7 +27,7 @@ final class OrdersTableMigration extends AbstractMigration
             ->addColumn('billing_address', 'string')
             ->addColumn('zipcode', 'string')
             ->addColumn('shipping_method_id', 'smallinteger')
-            ->addColumn('total', 'decimal', ['precision' => 2, 'scale' => 5])
+            ->addColumn('total', 'decimal', ['precision' => 5, 'scale' => 2])
             ->addColumn('order_status', 'string')
             ->addTimestamps();
 

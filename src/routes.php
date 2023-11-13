@@ -49,6 +49,12 @@ $router->addRoute('GET', '/contact', function () {
 $router->addRoute('GET', '/register', function () {
     $movieRepository = new UserRepository();
     $homeController = new UserController();
+    $homeController->showRegisterForm($movieRepository);
+});
+
+$router->addRoute('POST', '/register', function () {
+    $movieRepository = new UserRepository();
+    $homeController = new UserController();
     $homeController->register($movieRepository);
 });
 
