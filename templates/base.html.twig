@@ -5,70 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %} - eTicket</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding: 12px 16px;
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+    </style>
+
 </head>
 <body>
 {% if a == '1' %}
-    <div class="relative h-screen lg:h-screen w-full bg-cover bg-no-repeat" style="background-image: url(https://media.istockphoto.com/id/166186307/photo/reserved-theater-seats.jpg?s=612x612&w=0&k=20&c=tPSyXZPjmU2ZmFocpKI2_TeQZQwgGetJUsEkpOw7ANY=);">
+    <!-- <div class="relative h-screen lg:h-screen w-full bg-cover bg-no-repeat" style="background-image: url(https://media.istockphoto.com/id/166186307/photo/reserved-theater-seats.jpg?s=612x612&w=0&k=20&c=tPSyXZPjmU2ZmFocpKI2_TeQZQwgGetJUsEkpOw7ANY=);"> -->
 {% else %}
-    <div class="relative h-screen lg:h-24 w-full bg-cover bg-no-repeat bg-red-900">
+    <!-- <div class="relative h-screen lg:h-24 w-full bg-cover bg-no-repeat bg-red-900"> -->
 {% endif %}
 
-    <header class="text-neutral-200 container relative mx-auto flex flex-col overflow-hidden px-4 py-4 lg:flex-row lg:items-center">
-        <a href="/" class="flex items-center whitespace-nowrap text-3xl font-bold">
-    <span class="mr-2 w-16">
-      <img src="{{ asset('images/logo.png') }}" alt="" />
+
+
+<!-- component -->
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<div class="w-full py-2 text-gray-700 bg-red-900 dark-mode:text-gray-200 dark-mode:bg-gray-800">
+    <div x-data="{ open: false }" class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+        <div class="p-4 flex flex-row items-center justify-between">
+            <a href="#" class="text-lg font-semibold tracking-widest text-gray-200 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">e-Ticket</a>
+            <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
+                <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+                    <path x-show="!open" fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                    <path x-show="open" fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>
+        <nav :class="{'flex': open, 'hidden': !open}" class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
+            <a class="px-4 py-3 mt-2 text-sm  text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/popular">Popular</a>
+            <a class="px-4 py-3 mt-2 text-sm  text-gray-200 bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/romanian-night">Romanian Night</a>
+            <a class="px-4 py-3 mt-2 text-sm  text-gray-200 bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/french-movies">Films français</a>
+            <a class="px-4 py-3 mt-2 text-sm  text-gray-200 bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/contact">Contact</a>
+            <a href="/cart" role="button" class="relative flex ml-9 mr-9 mt-2">
+                <svg class="flex-1 w-8 h-8 fill-current text-gray-200" viewbox="0 0 24 24">
+                    <path d="M17,18C15.89,18 15,18.89 15,20A2,2 0 0,0 17,22A2,2 0 0,0 19,20C19,18.89 18.1,18 17,18M1,2V4H3L6.6,11.59L5.24,14.04C5.09,14.32 5,14.65 5,15A2,2 0 0,0 7,17H19V15H7.42A0.25,0.25 0 0,1 7.17,14.75C7.17,14.7 7.18,14.66 7.2,14.63L8.1,13H15.55C16.3,13 16.96,12.58 17.3,11.97L20.88,5.5C20.95,5.34 21,5.17 21,5A1,1 0 0,0 20,4H5.21L4.27,2M7,18C5.89,18 5,18.89 5,20A2,2 0 0,0 7,22A2,2 0 0,0 9,20C9,18.89 8.1,18 7,18Z"/>
+                </svg>
+                <span class="absolute right-0 top-0 rounded-full bg-orange-500 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center">{{ numItems }}
     </span>
-            eTicket
-        </a>
-        <input type="checkbox" class="peer hidden" id="navbar-open" />
-        <label class="absolute top-5 right-5 cursor-pointer lg:hidden" for="navbar-open">
-            <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-        </label>
-        <nav aria-label="Header Navigation" class="peer-checked:pt-8 peer-checked:max-h-60 flex max-h-0 w-full flex-col items-center overflow-hidden transition-all lg:ml-24 lg:max-h-full lg:flex-row">
-            <ul class="flex w-full flex-col items-center space-y-2 lg:flex-row lg:justify-center lg:space-y-0">
-                <li class="lg:mr-12"><a class="underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit text-neutral-200 rounded" href="/popular">Popular</a></li>
-                <li class="lg:mr-12"><a class="underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit text-neutral-200 rounded" href="/romanian-movies">Romanian Night</a></li>
-                <li class="lg:mr-12"><a class="underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit text-neutral-200 rounded" href="/french-movies">Films français</a></li>
-                <li class="lg:mr-12"><a class="underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit text-neutral-200 rounded" href="/top-rated">Top Rated</a></li>
-                <li class="lg:mr-12"><a class="underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit text-neutral-200 rounded" href="/contact">Contact Us</a></li>
-            </ul>
-            <hr class="mt-4 w-full lg:hidden" />
-            {% if user_id != 0 %}
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="http://localhost:8100/users/orders.php">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Dropdown menu</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    <li><a class="dropdown-item" href="logout">Log out</a></li>
-                </ul>
-
-
-            {% else %}
-                <div class="my-4 flex items-center space-x-6 space-y-2 lg:my-0 lg:ml-auto lg:space-x-8 lg:space-y-0">
-                    <a href="/login" title="" class="whitespace-nowrap rounded font-medium underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit text-neutral-200 "> Log in </a>
-                    <a href="/register" title="" class="whitespace-nowrap rounded-full bg-pink-500 px-5 py-2 font-medium text-white transition-all duration-200 hover:bg-pink-600 hover:bg-transparent border-pink-500 border-2">Get free account</a>
+            </a>
+            <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                <button @click="open = !open" class="flex flex-row items-center w-full ">
+                    <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1663877174990-b1589bcdd411?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" />
+                    <div class="absolute right-0 bottom-0 h-3 w-3 rounded-full bg-green-600"></div>
+                </button>
+                <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
+                    <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
+                        <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Link #1</a>
+                        <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Link #2</a>
+                        <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Link #3</a>
+                    </div>
                 </div>
-            {% endif %}
-
+            </div>
         </nav>
-    </header>
+    </div>
+</div>
 
-    {% block content %}{% endblock %}
+{% block content %}{% endblock %}
 
-    <footer class="relative mt-20 bg-gray-900 px-4 pt-14">
-        <div class="absolute -top-10 left-1/2 h-16 w-16 -translate-x-1/2 rounded-xl border-4 border-sky-500 bg-white p-2"><img class="h-full object-contain" src="{{ asset('images/logo.png') }}" alt="" /></div>
-        <nav aria-label="Footer Navigation" class="mx-auto mb-1 flex max-w-lg flex-col gap-x-8 gap-y-2 text-center sm:flex-row sm:text-center">
-            <a href="/" class="font-medium text-white underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit rounded">Home</a>
-            <a href="/popular" class="font-medium text-white underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit rounded">Popular</a>
-            <a href="/romanian-movies" class="font-medium text-white underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit rounded">Romanian Night</a>
-            <a href="/french-movies" class="font-medium text-white underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit rounded">Films français</a>
-            <a href="/contact" class="font-medium text-white underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit rounded">Contact Us</a>
-        </nav>
-        <p class="py-5 text-center text-gray-300">&copy; {{ 'now' | date('Y') }} Marius Sandulache | All Rights Reserved</p>
-    </footer>
+<footer class="relative mt-20 bg-gray-900 px-4 pt-14">
+    <div class="absolute -top-10 left-1/2 h-16 w-16 -translate-x-1/2 rounded-xl border-4 border-sky-500 bg-white p-2">
+        <img class="h-full object-contain" src="{{ asset('images/logo.png') }}" alt=""/></div>
+    <nav aria-label="Footer Navigation"
+         class="mx-auto mb-1 flex max-w-lg flex-col gap-x-8 gap-y-2 text-center sm:flex-row sm:text-center">
+        <a href="/"
+           class="font-medium text-white underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit rounded">Home</a>
+        <a href="/popular"
+           class="font-medium text-white underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit rounded">Popular</a>
+        <a href="/romanian-movies"
+           class="font-medium text-white underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit rounded">Romanian
+            Night</a>
+        <a href="/french-movies"
+           class="font-medium text-white underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit rounded">Films
+            français</a>
+        <a href="/contact"
+           class="font-medium text-white underline decoration-transparent transition duration-300 ease-in-out hover:decoration-inherit rounded">Contact
+            Us</a>
+    </nav>
+    <p class="py-5 text-center text-gray-300">&copy; {{ 'now' | date('Y') }} Marius Sandulache | All Rights Reserved</p>
+</footer>
 
 </div>
 </body>

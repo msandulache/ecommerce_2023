@@ -10,12 +10,14 @@ class CartController extends Controller
     {
         $items = $cartRepository->showItems();
         echo $this->twig->render('cart.html.twig',
-            ['a' => 0, 'user_id' => $this->userId, 'items' => $items]);
+            ['a' => 0, 'user_id' => $this->userId, 'items' => $items,
+                'numItems' => $this->number_of_cart_items]);
     }
 
     public function checkout()
     {
-        echo $twig->render('checkout.html.twig', ['a' => 0, 'user_id' => $this->userId]);
+        echo $twig->render('checkout.html.twig', ['a' => 0, 'user_id' => $this->userId,
+            'numItems' => $this->number_of_cart_items]);
     }
 
     public function charge()
@@ -33,12 +35,14 @@ class CartController extends Controller
 
         $cart = new CartRepository();
         $cart->deleteAllItems();
-        echo $twig->render('thank-you.html.twig', ['a' => 0, 'user_id' => $userId]);
+        echo $twig->render('thank-you.html.twig', ['a' => 0, 'user_id' => $userId,
+            'numItems' => $this->number_of_cart_items]);
     }
 
     public function thankYou()
     {
-        echo $this->twig->render('thank-you.html.twig', ['a' => 0, 'user_id' => $this->userId]);
+        echo $this->twig->render('thank-you.html.twig', ['a' => 0, 'user_id' => $this->userId,
+            'numItems' => $this->number_of_cart_items]);
     }
 
 

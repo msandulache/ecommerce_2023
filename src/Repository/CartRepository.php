@@ -32,6 +32,20 @@ VALUES (:user_id, :name, :image, :price, :amount, :created_at)");
         }
     }
 
+    public function showNumberOfItems()
+    {
+        if(isset($_SESSION['user_id'])) {
+            $products = $this->db->query("SELECT * FROM cart WHERE user_id = '" . $_SESSION['user_id'] . "'");
+            $products->execute();
+
+            $allProducts = $products->fetchAll(\PDO::FETCH_OBJ);
+
+            return count($allProducts);
+        } else {
+            return 0;
+        }
+    }
+
     public function deleteItem($id)
     {
         $update = $this->db->prepare("DELETE FROM cart WHERE id = '" . $id . "'");

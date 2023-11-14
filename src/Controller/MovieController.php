@@ -11,7 +11,8 @@ class MovieController extends Controller
         $movies = $movieRepository->findByCategoryName('Now Playing');
 
         echo $this->twig->render('index.html.twig',
-            ['a' => 1, 'user_id' => $this->userId, 'movies' => $movies]);
+            ['a' => 1, 'user_id' => $this->userId, 'movies' => $movies,
+                'numItems' => $this->number_of_cart_items]);
         exit;
     }
 
@@ -20,7 +21,8 @@ class MovieController extends Controller
         $movies = $movieRepository->findByCategoryName('Popular');
 
         echo $this->twig->render('popular.html.twig',
-            ['a' => 0, 'user_id' => $this->userId, 'movies' => $movies]);
+            ['a' => 0, 'user_id' => $this->userId, 'movies' => $movies,
+                'numItems' => $this->number_of_cart_items]);
         exit;
     }
 
@@ -29,7 +31,8 @@ class MovieController extends Controller
         $movies = $movieRepository->findByCategoryName('Romanian Night');
 
         echo $this->twig->render('romanian-night.html.twig',
-            ['a' => 0, 'user_id' => $this->userId, 'movies' => $movies]);
+            ['a' => 0, 'user_id' => $this->userId, 'movies' => $movies,
+                'numItems' => $this->number_of_cart_items]);
         exit;
     }
 
@@ -38,7 +41,8 @@ class MovieController extends Controller
         $movies = $movieRepository->findByCategoryName('Films français');
 
         echo $this->twig->render('french-movies.html.twig',
-            ['a' => 0, 'user_id' => $this->userId, 'movies' => $movies]);
+            ['a' => 0, 'user_id' => $this->userId, 'movies' => $movies,
+                'numItems' => $this->number_of_cart_items]);
         exit;
     }
 
@@ -46,7 +50,8 @@ class MovieController extends Controller
     {
         $movie = $movieRepository->findByTmdbId($movieId);
 
-        echo $this->twig->render('movie.html.twig', ['a' => 0, 'user_id' => $this->userId, 'movie' => $movie]);
+        echo $this->twig->render('movie.html.twig', ['a' => 0, 'user_id' => $this->userId, 'movie' => $movie,
+            'numItems' => $this->number_of_cart_items]);
         exit;
     }
 
